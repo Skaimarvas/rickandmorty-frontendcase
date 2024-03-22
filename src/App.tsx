@@ -1,9 +1,12 @@
 import "./App.css";
+import Option from "./components/Option";
 
 const App: React.FC = () => {
   return (
     <>
-      <div className="bg-blue-400 h-4"></div>
+      <div>
+        <Option />
+      </div>
     </>
   );
 };
