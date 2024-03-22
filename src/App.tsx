@@ -1,14 +1,15 @@
 import "./App.css";
-import Option from "./components/Option";
+import Section from "./components/Section";
 
 const App: React.FC = () => {
   return (
     <>
-      <div className="flex flex-col justify-center">
+      <div className="flex flex-col justify-center items-center gap-5 pt-10">
         <h2 className="text-2xl font-bold text-center">
           Rick and Morty Universe
         </h2>
-        <Option />
+
+        <Section />
       </div>
     </>
   );
