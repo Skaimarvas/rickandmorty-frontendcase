@@ -19,7 +19,7 @@ const App: React.FC = () => {
             <input
               {...register("name")}
               type="text"
-              className="border border-gray-400 px-2 w-full rounded-md"
+              className="border border-gray-400 px-2 py-1 w-full rounded-md"
             />
           </div>
         </form>
