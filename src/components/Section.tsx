@@ -19,12 +19,7 @@ const Section: React.FC = () => {
     <div className="flex flex-col  items-center rounded-md border border-gray-400 w-[400px] h-[500px] overflow-scroll ">
       {characters &&
         characters.map((char: any) => (
-          <Option
-            key={char.id}
-            name={char.name}
-            img={char.image}
-            episodeCount={char.episode.length}
-          />
+          <Option key={char.id} character={char} />
         ))}
     </div>
   );
