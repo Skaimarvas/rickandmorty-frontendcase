@@ -1,18 +1,14 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import Option from "./Option";
-import axios from "axios";
+
+import { useAppDispatch, useAppSelector } from "../hooks/hook";
+import { addListData } from "../store/thunks/charThunk";
 
 const Section: React.FC = () => {
-  const [characters, setCharacters] = useState([]);
-
+  const { characters } = useAppSelector((store) => store.characters);
+  const dispatch = useAppDispatch();
   useEffect(() => {
-    axios
-      .get("https://rickandmortyapi.com/api/character")
-      .then((res: any) => {
-        console.log(res.data);
-        setCharacters(res.data.results);
-      })
-      .catch((err: any) => console.log(err));
+    dispatch(addListData());
   }, []);
 
   return (
