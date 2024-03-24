@@ -1,24 +1,25 @@
-export const ADD_CHAR = "ADD_CHAR";
+export const CHECKED_CHAR = "CHECKED_CHAR";
 export const ADD_LIST = "ADD_LIST";
-export const REMOVE_CHAR = "REMOVE_CHAR";
+export const UNCHECKED_CHAR = "UNCHECKED_CHAR";
 
-export const addChar = (char: any) => {
+export const checkedChar = (id: number) => {
   return {
-    type: ADD_CHAR,
-    payload: char,
+    type: CHECKED_CHAR,
+    payload: id,
   };
 };
 
-export const removeChar = (char: any) => {
+export const uncheckedChar = (id: number) => {
   return {
-    type: REMOVE_CHAR,
-    payload: char,
+    type: UNCHECKED_CHAR,
+    payload: id,
   };
 };
 
 export const addList = (chars: any) => {
+  const newData = chars.map((char: any) => ({ ...char, checked: false }));
   return {
     type: ADD_LIST,
-    payload: chars,
+    payload: newData,
   };
 };
