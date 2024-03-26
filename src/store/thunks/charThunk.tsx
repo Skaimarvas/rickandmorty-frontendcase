@@ -15,3 +15,15 @@ export const addListData = () => {
       .catch((err: any) => console.log(err));
   };
 };
+
+export const searchCharList = (name: string) => {
+  return (dispatch: Dispatch) => {
+    axios
+      .get(`https://rickandmortyapi.com/api/character/?name=${name}`)
+      .then((res: any) => {
+        console.log(res.data);
+        dispatch(addList(res.data.results));
+      })
+      .catch((err: any) => console.log(err));
+  };
+};
