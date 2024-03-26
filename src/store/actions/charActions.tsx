@@ -1,6 +1,7 @@
 export const CHECKED_CHAR = "CHECKED_CHAR";
 export const ADD_LIST = "ADD_LIST";
 export const UNCHECKED_CHAR = "UNCHECKED_CHAR";
+export const SEARCH_CHAR = "SEARCH_CAR";
 
 export const checkedChar = (id: number) => {
   return {
