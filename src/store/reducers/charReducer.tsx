@@ -1,11 +1,28 @@
-import { ADD_LIST, CHECKED_CHAR, UNCHECKED_CHAR } from "../actions/charActions";
+import {
+  ADD_LIST,
+  CHECKED_CHAR,
+  FETCH_STATES,
+  NEXT,
+  PAGES,
+  PREV,
+  SET_FETCH_STATES,
+  UNCHECKED_CHAR,
+} from "../actions/charActions";
 
-interface GlobalState {
-  characters: any[];
+export interface GlobalState {
+  charactersList: any[];
+  prev: string;
+  next: string;
+  pages: number;
+  fetchState: string;
 }
 
 const initialState: GlobalState = {
-  characters: [],
+  charactersList: [],
+  prev: "",
+  next: "",
+  pages: 0,
+  fetchState: FETCH_STATES.notFetched,
 };
 
 export const charReducer = (state = initialState, action: any) => {
@@ -13,13 +30,32 @@ export const charReducer = (state = initialState, action: any) => {
     case ADD_LIST:
       return {
         ...state,
-        characters: [...action.payload],
+        charactersList: [...action.payload],
       };
-
+    case SET_FETCH_STATES:
+      return {
+        ...state,
+        fetchState: action.payload,
+      };
+    case PAGES:
+      return {
+        ...state,
+        pages: action.payload,
+      };
+    case PREV:
+      return {
+        ...state,
+        prev: action.payload,
+      };
+    case NEXT:
+      return {
+        ...state,
+        next: action.payload,
+      };
     case CHECKED_CHAR:
       return {
         ...state,
-        characters: state.characters.map((char) => {
+        charactersList: state.charactersList.map((char) => {
           if (char.id == action.payload) {
             return { ...char, checked: true };
           }
@@ -29,7 +65,7 @@ export const charReducer = (state = initialState, action: any) => {
     case UNCHECKED_CHAR:
       return {
         ...state,
-        characters: state.characters.map((char) => {
+        charactersList: state.charactersList.map((char) => {
           if (char.id == action.payload) {
             return { ...char, checked: false };
           }
