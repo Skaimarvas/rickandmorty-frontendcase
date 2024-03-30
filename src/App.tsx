@@ -19,6 +19,7 @@ const App: React.FC = () => {
   const { charactersList, prev, next, pages } = useAppSelector(
     (store) => store
   );
+
   const getPageNumber = (url: string | null) => {
     if (!url) return 0;
     const params = new URLSearchParams(new URL(url).search);
@@ -33,6 +34,24 @@ const App: React.FC = () => {
   };
 
   const name = watch("name");
+
+  const boldifyMatchingLetters = (searchName: string) => {
+    const index = searchName.toLowerCase().indexOf(name.toLowerCase());
+    if (index !== -1) {
+      const beforeMatch = searchName.slice(0, index);
+      const match = searchName.slice(index, index + name.length);
+      const afterMatch = searchName.slice(index + name.length);
+      return (
+        <>
+          {beforeMatch}
+          <strong>{match}</strong>
+          {afterMatch}
+        </>
+      );
+    }
+    return name;
+  };
+
   useEffect(() => {
     if (name) dispatch(searchCharList(name));
   }, [name]);
@@ -60,7 +79,7 @@ const App: React.FC = () => {
             />
           </form>
         </div>
-        <Section />
+        <Section boldifyMatchingLetters={boldifyMatchingLetters} />
         <div className="flex justify-between items-center w-[400px]">
           <button
             disabled={!prev}
