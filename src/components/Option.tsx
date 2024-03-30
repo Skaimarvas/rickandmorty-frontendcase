@@ -5,9 +5,13 @@ import { checkedChar, uncheckedChar } from "../store/actions/charActions";
 
 interface OptionProp {
   character: any;
+  boldifyMatchingLetters: any;
 }
 
-const Option: React.FC<OptionProp> = ({ character }) => {
+const Option: React.FC<OptionProp> = ({
+  character,
+  boldifyMatchingLetters,
+}) => {
   const dispatch = useAppDispatch();
   const { register, handleSubmit } = useForm();
   const { image, name, episode, checked, id } = character;
@@ -39,7 +43,7 @@ const Option: React.FC<OptionProp> = ({ character }) => {
           <img src={image} alt="" className="w-12 h-12 rounded-md" />
         </div>
         <div className="flex flex-col">
-          <span> {name}</span>
+          <span> {boldifyMatchingLetters(name)}</span>
           <span className="text-sm"> {episode.length} Episodes </span>
         </div>
       </label>
