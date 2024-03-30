@@ -11,6 +11,7 @@ import {
 
 export interface GlobalState {
   charactersList: any[];
+  checkedCharactersList: any[];
   prev: string;
   next: string;
   pages: number;
@@ -19,6 +20,7 @@ export interface GlobalState {
 
 const initialState: GlobalState = {
   charactersList: [],
+  checkedCharactersList: [],
   prev: "",
   next: "",
   pages: 0,
@@ -55,7 +57,7 @@ export const charReducer = (state = initialState, action: any) => {
     case CHECKED_CHAR:
       return {
         ...state,
-        charactersList: state.charactersList.map((char) => {
+        charactersList: state.charactersList.map((char: any) => {
           if (char.id == action.payload) {
             return { ...char, checked: true };
           }
@@ -65,13 +67,14 @@ export const charReducer = (state = initialState, action: any) => {
     case UNCHECKED_CHAR:
       return {
         ...state,
-        charactersList: state.charactersList.map((char) => {
+        charactersList: state.charactersList.map((char: any) => {
           if (char.id == action.payload) {
             return { ...char, checked: false };
           }
           return char;
         }),
       };
+
     default:
       return state;
   }
