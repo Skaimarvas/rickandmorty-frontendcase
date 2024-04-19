@@ -6,12 +6,27 @@ export const PREV = "PREV";
 export const NEXT = "NEXT";
 export const PAGES = "PAGES";
 export const SET_FETCH_STATES = "SET_FETCH_STATES";
+export const SET_ERROR_STATE = "SET_ERROR_STATE";
+export const RESET_ERROR_STATE = "RESET_ERROR_STATE";
 
 export const FETCH_STATES = {
   notFetched: "NOT_FETCHED",
   fetching: "FETCHING",
   fetched: "FETCHED",
   failed: "FAILED",
+};
+
+export const setErrorState = (error: string) => {
+  return {
+    type: SET_ERROR_STATE,
+    payload: error,
+  };
+};
+
+export const resetErrorState = () => {
+  return {
+    type: RESET_ERROR_STATE,
+  };
 };
 
 export const setFetchState = (fetchState: string) => {

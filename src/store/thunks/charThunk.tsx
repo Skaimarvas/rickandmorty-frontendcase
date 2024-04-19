@@ -8,6 +8,8 @@ import {
   addNext,
   addPrev,
   pages,
+  resetErrorState,
+  setErrorState,
   setFetchState,
 } from "../actions/charActions";
 
@@ -43,8 +45,12 @@ export const searchCharList = (name: string) => {
         dispatch(addPrev(res.data.info.prev));
         dispatch(pages(res.data.info.pages));
         dispatch(setFetchState(FETCH_STATES.fetched));
+        dispatch(resetErrorState());
       })
-      .catch((err: any) => console.log(err));
+      .catch((err: any) => {
+        console.log(err.response.data.error);
+        dispatch(setErrorState(err.response.data.error));
+      });
     dispatch(setFetchState(FETCH_STATES.failed));
   };
 };

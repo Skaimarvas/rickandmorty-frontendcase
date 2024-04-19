@@ -5,6 +5,8 @@ import {
   NEXT,
   PAGES,
   PREV,
+  RESET_ERROR_STATE,
+  SET_ERROR_STATE,
   SET_FETCH_STATES,
   UNCHECKED_CHAR,
 } from "../actions/charActions";
@@ -16,6 +18,8 @@ export interface GlobalState {
   next: string;
   pages: number;
   fetchState: string;
+  initialUrl: string;
+  errorState: string;
 }
 
 const initialState: GlobalState = {
@@ -24,7 +28,9 @@ const initialState: GlobalState = {
   prev: "",
   next: "",
   pages: 0,
+  initialUrl: "https://rickandmortyapi.com/api/character",
   fetchState: FETCH_STATES.notFetched,
+  errorState: "",
 };
 
 export const charReducer = (state = initialState, action: any) => {
@@ -39,6 +45,17 @@ export const charReducer = (state = initialState, action: any) => {
         ...state,
         fetchState: action.payload,
       };
+    case SET_ERROR_STATE:
+      return {
+        ...state,
+        errorState: action.payload,
+      };
+    case RESET_ERROR_STATE:
+      return {
+        ...state,
+        errorState: "",
+      };
+
     case PAGES:
       return {
         ...state,
