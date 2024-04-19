@@ -16,7 +16,7 @@ interface Character {
 
 const App: React.FC = () => {
   const dispatch = useAppDispatch();
-  const { charactersList, prev, next, pages } = useAppSelector(
+  const { charactersList, prev, next, pages, initialUrl } = useAppSelector(
     (store) => store
   );
 
@@ -53,7 +53,11 @@ const App: React.FC = () => {
   };
 
   useEffect(() => {
-    if (name) dispatch(searchCharList(name));
+    if (name) {
+      dispatch(searchCharList(name));
+    } else {
+      dispatch(addListData(initialUrl));
+    }
   }, [name]);
   return (
     <>
@@ -71,7 +75,7 @@ const App: React.FC = () => {
                 ""
               )
             )}
-          <form onSubmit={handleSubmit(onSubmit)}>
+          <form onSubmit={handleSubmit(onSubmit)} className="w-full">
             <input
               {...register("name")}
               type="text"
